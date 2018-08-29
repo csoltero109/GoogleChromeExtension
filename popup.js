@@ -6,14 +6,32 @@
 
 let changeColor = document.getElementById('changeColor');
 chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
+	changeColor.style.backgroundColor = data.color;
+	changeColor.setAttribute('value', data.color);
 });
 changeColor.onclick = function(element) {
-    let color = element.target.value;
+	let color = element.target.value;
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.executeScript(
           tabs[0].id,
           {code: 'document.body.style.backgroundColor = "' + color + '";'});
     });
 };
+
+
+
+
+
+
+let newWindow = document.getElementById('newWindow');
+newWindow.onclick = function(element){
+//chrome.windows.create({});
+	console.log('working');
+};
+
+
+
+
+let urlToGoTo = 'https://docs.google.com/spreadsheets/u/0/';
+
+let goToSheets = chrome.browser.openTab(urlToGoTo);
